@@ -24,9 +24,33 @@ void SolvePart1(List<List<int>> input)
         sum += diff;
         
     }
-    Console.Write("Part1 sum is "+sum);
+    Console.WriteLine("Part1 sum is "+sum);
 
+}
+
+void SolvePart2(List<List<int>> input)
+{
+    var sum = 0;
+    foreach (var numbers in input)
+    {
+        for (var i=0; i<numbers.Count; i++)
+        {
+            for (var j = 0; j < numbers.Count; j++)
+            {
+                if(i==j) continue;
+                var num=(double)numbers[i]/(double)numbers[j];
+                if (num % 1 == 0)
+                {
+                    sum += (int)num;
+                }
+                
+            }
+        }
+    }
+    Console.WriteLine("Part2 sum is "+sum);
 }
 
 var input=GetInput();
 SolvePart1(input);
+SolvePart2(input);
+
