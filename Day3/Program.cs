@@ -22,5 +22,87 @@ void Part1(int input)
     Console.WriteLine(sum);
 
 }
-var input = 347991;
+
+int Part2(int input)
+{
+    const int matrixSize = 100;
+    var matrix = new int[matrixSize, matrixSize];
+
+    var x = matrixSize / 2;
+    var y = x;
+    matrix[y, x] = 1;
+    var step = 1;
+    
+    while (true)
+    {
+        int result;
+        for (var i = 0; i < step; i++)
+        {
+            x++;
+            result = 0;
+            result += matrix[y, x - 1];
+            result += matrix[y - 1, x - 1];
+            result += matrix[y - 1, x];
+            result += matrix[y - 1, x + 1];
+            matrix[y, x] = result;
+            
+            if (input < result)
+            { 
+                return result;
+            }
+        }
+        for (var i = 0; i < step; i++)
+        {
+            y--;
+            result = 0;
+            result += matrix[y + 1, x];
+            result += matrix[y + 1, x - 1];
+            result += matrix[y , x - 1];
+            result += matrix[y - 1, x - 1];
+            matrix[y, x] = result;
+            if (input < result)
+            { 
+                return result;
+            }
+        }
+
+        step++;
+        for (var i = 0; i < step; i++)
+        {
+            x--;
+            result = 0;
+            result += matrix[y, x + 1];
+            result += matrix[y + 1, x + 1];
+            result += matrix[y + 1, x];
+            result += matrix[y + 1, x - 1];
+            matrix[y, x] = result;
+            if (input < result)
+            { 
+                return result;
+            }
+        }
+        for (var i = 0; i < step; i++)
+        {
+            y++;
+            result = 0;
+            result += matrix[y - 1, x];
+            result += matrix[y - 1, x + 1];
+            result += matrix[y, x + 1];
+            result += matrix[y + 1, x + 1];
+            matrix[y, x] = result;
+            if (input < result)
+            { 
+                return result;
+            }
+        }
+
+        step++;
+    }
+    
+    
+}
+
+const int input = 347991;
 Part1(input);
+var result=Part2(input);
+Console.WriteLine("the part2 answer is "+ result);
