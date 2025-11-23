@@ -1,18 +1,12 @@
-﻿List<List<String>> GetInput()
+﻿List<List<string>> GetInput()
 {
     const string filePath = "input.txt";
     var fileContents = File.ReadLines(filePath).ToList();
-    var input=new List<List<String>>();
-    foreach (var line in fileContents)
-    {
-        var words=line.Split(' ').ToList();
-        input.Add(words);
-    }
-    
-    return input;
+
+    return fileContents.Select(line => line.Split(' ').ToList()).ToList();
 }
 
-void Part1(List<List<String>> input)
+void Part1(List<List<string>> input)
 {
     var count = 0;
     foreach (var line in input)
@@ -26,8 +20,37 @@ void Part1(List<List<String>> input)
             count++;
         }
     }
-    Console.WriteLine(count);
+    Console.WriteLine("part 1 : " + count);
 }
 
+void Part2(List<List<string>> input)
+{
+    var count = 0;
+    foreach (var line in input)
+    {
+        var lengthList = line.Count;
+        var hashset = new HashSet<string>(line); 
+        var hashsetSize = hashset.Count;
+
+        if (lengthList == hashsetSize)
+        {
+            var newHashset = new HashSet<string>();
+            foreach (var word in hashset)
+            {
+                var charArray = word.ToCharArray();
+                Array.Sort(charArray);
+                var sortedString = new string(charArray);
+                newHashset.Add(sortedString);
+            }
+
+            if (newHashset.Count == hashset.Count)
+            {
+                count++;
+            }
+        }
+    }
+    Console.WriteLine("part 2 " + count);
+}
 var input=GetInput();
 Part1(input);
+Part2(input);
