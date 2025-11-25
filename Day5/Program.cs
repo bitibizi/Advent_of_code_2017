@@ -19,9 +19,35 @@ void Part1(List<int> input)
 
     }
     
-    Console.WriteLine(step);
+    Console.WriteLine("The part 1 is " + step);
 
 }
 
-var input = GetInput();
-Part1(input);
+void Part2(List<int> input)
+{
+    var position = 0;
+    var step = 0;
+ 
+    while (position < input.Count)
+    { 
+        var oldValue = input[position];
+        if (oldValue >= 3)
+        {
+            input[position] --;
+        }
+        else
+        {
+            input[position] ++;
+        }
+        position += oldValue;
+        step++;
+
+    }
+    
+    Console.WriteLine("the part 2 is " + step);
+}
+
+var input1 = GetInput();
+var input2 = GetInput();
+Part1(input1);
+Part2(input2);
