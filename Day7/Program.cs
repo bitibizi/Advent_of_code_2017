@@ -57,6 +57,13 @@ void Part2(List<string> input, string root)
             .Where(g => g.Count() == 1)
             .Select(g => g.First().Key).First();
         
+        var notOddChild = dict.Keys.First(k => k != oddChild);
+        var findOddChild = input.First(x => x.StartsWith(oddChild)).Split(' ');
+        var oddChildWeight = int.Parse(findOddChild[1].Trim('(', ')'));
+        var result = Math.Abs(dict[oddChild] - dict[notOddChild]);
+        Console.WriteLine("oddchild weight is "+oddChildWeight
+                                               +" differnece is " + result 
+                                               + " the Answer is "+ (oddChildWeight-result));
         Part2(input, oddChild);
     }
     else
@@ -84,6 +91,8 @@ int GetTotalWeight(List<string> input, string root)
     
     return weight;
 }
+
+
 
 var input = GetInput();
 var root=Part1(input);
